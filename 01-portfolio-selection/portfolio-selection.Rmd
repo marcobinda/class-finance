@@ -1,0 +1,49 @@
+---
+title: "Portfolio Selection, by Harry Markowitz"
+author: "Marco de Pereira Binda"
+date: "04/06/2020"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Markowitz, Harry. *Portfolio Selection*. The Journal of Finance, vol. 7, no. 1, 1952, pp. 77–91. JSTOR, [www.jstor.org/stable/2975974](www.jstor.org/stable/2975974).
+
+```{r carrega-dados, echo = FALSE}
+load('rda/risk.return.rda')
+```
+
+
+```{r carrega-pacotes, echo = FALSE, message = FALSE}
+library(tidyverse)
+```
+
+
+## Introdução
+
+Lorem ipsum
+
+## Risco - Retorno
+
+```{r tabela-risco-retorno, echo = FALSE, comment = " "}
+tibble(risk.return)
+```
+
+
+## Gráfico
+
+```{r grafico-risco-retorno, echo = FALSE}
+risk.return %>%
+  ggplot(aes(return, risk)) + 
+  geom_point(aes(col = ativo), size = 3.5, alpha = 0.5) + 
+#  geom_text(aes(label = ativo), size = 2.5, nudge_y = 0.01, nudge_x = 0.01) + 
+  scale_y_continuous(limits = c(0, 0.5), labels = scales::percent_format()) + 
+  scale_x_continuous(limits = c(0, 0.5), labels = scales::percent_format()) + 
+  labs(title = "Risco-Retorno (dados de 2016 a 2019)",
+       y = 'Risco', x = 'Retorno',
+       caption = '(Elaborado por: @marco_binda)',
+       color = 'Ativo')
+#  theme(legend.title = "Ativo")
+```
